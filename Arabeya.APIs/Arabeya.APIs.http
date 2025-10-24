@@ -1,0 +1,6 @@
+@Arabeya.APIs_HostAddress = http://localhost:5180
+
+GET {{Arabeya.APIs_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
