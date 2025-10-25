@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arabeya.Infrastructure", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arabeya.Infrastructure.Persistence", "Arabeya.Infrastructure.Persistence\Arabeya.Infrastructure.Persistence.csproj", "{391CE494-D99E-4826-9CD4-D4835BC2C6AE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{76A3E873-52D2-4732-AFC5-24AA2F8ED04C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arabeya.Shared", "Arabeya.Shared\Arabeya.Shared.csproj", "{6E2EF10A-02EB-41E9-8DEE-69F78A602185}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,10 @@ Global
 		{391CE494-D99E-4826-9CD4-D4835BC2C6AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{391CE494-D99E-4826-9CD4-D4835BC2C6AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{391CE494-D99E-4826-9CD4-D4835BC2C6AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E2EF10A-02EB-41E9-8DEE-69F78A602185}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E2EF10A-02EB-41E9-8DEE-69F78A602185}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E2EF10A-02EB-41E9-8DEE-69F78A602185}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E2EF10A-02EB-41E9-8DEE-69F78A602185}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +87,8 @@ Global
 		{B764A276-644D-422F-8E17-DC3E5B095A08} = {A5459E76-F753-4ACD-BF80-77636C9CEF91}
 		{8B0AFCC5-37C8-4AD7-82F6-C81BD2AF5227} = {1E0726E3-AF40-4479-A8F7-6D46BBBD428E}
 		{391CE494-D99E-4826-9CD4-D4835BC2C6AE} = {1E0726E3-AF40-4479-A8F7-6D46BBBD428E}
+		{76A3E873-52D2-4732-AFC5-24AA2F8ED04C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{6E2EF10A-02EB-41E9-8DEE-69F78A602185} = {76A3E873-52D2-4732-AFC5-24AA2F8ED04C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CC36EF98-257B-42D4-A7FE-2A719DBCFFED}
