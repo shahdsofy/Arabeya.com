@@ -7,15 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Mapping\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="15.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.10" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Arabeya.Core.Application.Abstraction\Arabeya.Core.Application.Abstraction.csproj" />
+    <ProjectReference Include="..\Arabeya.Infrastructure.Persistence\Arabeya.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\Arabeya.Infrastructure\Arabeya.Infrastructure.csproj" />
+    <ProjectReference Include="..\Arabeya.Shared\Arabeya.Shared.csproj" />
   </ItemGroup>
 
 </Project>

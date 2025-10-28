@@ -18,4 +18,12 @@
     <Folder Include="Extensions\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Arabeya.APIs.Controllers\Arabeya.APIs.Controllers.csproj" />
+    <ProjectReference Include="..\Arabeya.Core.Application\Arabeya.Core.Application.csproj" />
+    <ProjectReference Include="..\Arabeya.Core.Domain\Arabeya.Core.Domain.csproj" />
+    <ProjectReference Include="..\Arabeya.Infrastructure.Persistence\Arabeya.Infrastructure.Persistence.csproj" />
+    <ProjectReference Include="..\Arabeya.Infrastructure\Arabeya.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
