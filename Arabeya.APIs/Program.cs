@@ -4,11 +4,11 @@ using Arabeya.APIs.Middlewares;
 
 namespace Arabeya.APIs
 {
-	public class Program
-	{
-		public static void Main(string[] args)
-		{
-			var builder = WebApplication.CreateBuilder(args);
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
 			// Add services to the container.
 
@@ -17,7 +17,8 @@ namespace Arabeya.APIs
 
 			builder.Services.RegesteredPresestantLayer();
 
-			var app = builder.Build();
+            var app = builder.Build();
+            await app.DatabaseAsync();
 
 			app.UseErrorHandlerMiddleware();
 			// Configure the HTTP request pipeline.
@@ -27,7 +28,7 @@ namespace Arabeya.APIs
 				app.UseSwaggerUI();
 			}
 
-			app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
 			app.UseAuthorization();
 

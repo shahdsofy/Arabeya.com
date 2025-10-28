@@ -15,8 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Arabeya.APIs.Controllers\Arabeya.APIs.Controllers.csproj" />
-    <ProjectReference Include="..\Arabeya.Shared\Arabeya.Shared.csproj" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 
 </Project>
