@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Arabeya.Core.Application.Abstraction\Arabeya.Core.Application.Abstraction.csproj" />
     <ProjectReference Include="..\Arabeya.Shared\Arabeya.Shared.csproj" />
   </ItemGroup>
 

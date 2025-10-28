@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Arabeya.Core.Domain\Arabeya.Core.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

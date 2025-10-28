@@ -1,12 +1,16 @@
 
 using Arabeya.APIs.Extensions;
 using Arabeya.APIs.Middlewares;
+using Arabeya.Core.Application;
+using Arabeya.Infrastructure;
+using Arabeya.Infrastructure.Persistence;
+using System.Threading.Tasks;
 
 namespace Arabeya.APIs
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +20,11 @@ namespace Arabeya.APIs
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 			builder.Services.RegesteredPresestantLayer();
+			builder.Services.AddInfrastructureService();
+			builder.Services.AddPersistenceServices(builder.Configuration);
+			builder.Services.AddApplicationServices();
+			builder.Services.AddIdentityService(builder.Configuration);
+
 
             var app = builder.Build();
             await app.DatabaseAsync();
@@ -31,7 +40,8 @@ namespace Arabeya.APIs
             app.UseHttpsRedirection();
 
 			app.UseAuthorization();
-
+			app.UseAuthentication();
+			app.UseStaticFiles();
 
 			app.MapControllers();
 
