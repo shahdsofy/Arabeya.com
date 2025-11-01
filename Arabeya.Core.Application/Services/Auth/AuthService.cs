@@ -1,5 +1,6 @@
 ﻿using Arabeya.Core.Application.Abstraction.Models.Auth;
 using Arabeya.Core.Application.Abstraction.Sevices.Auth;
+using Arabeya.Core.Application.Abstraction.Sevices.Emails;
 using Arabeya.Core.Domain.Contracts.Infrastructure;
 using Arabeya.Core.Domain.Entities.Identity;
 using Arabeya.Infrastructure;
@@ -21,7 +22,8 @@ namespace Arabeya.Core.Application.Services.Auth
         SignInManager<ApplicationUser>signInManager
         ,IOptions<JwtSettings>jwt
         , IAttachmentService _attachmentService
-        , IConfiguration configuration) : IAuthService
+        , IConfiguration configuration
+        ,IEmailService emailService) : IAuthService
     {
         private readonly JwtSettings jwtSettings = jwt.Value;
         public async Task<Response<UserDto>> LoginAsync(LoginDto model)
@@ -102,7 +104,24 @@ namespace Arabeya.Core.Application.Services.Auth
             if (!result.Succeeded)
                 return Response<UserDto>.Fail(HttpStatusCode.BadRequest, ErrorType.Validation.ToString(), "Invalid Login!");
 
-            
+
+            // ✅ ✅ توليد التوكن هنا
+            var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+            var encodedToken = Uri.EscapeDataString(token);
+
+            // ✅ تجهيز الإيميل
+            var emailBody = $"Your Email Confirmation Token is:\n\n{encodedToken}\n\nUse this token in your app to confirm your email.";
+
+            var emailModel = new Arabeya.Core.Application.Abstraction.Models.Emails.Email
+            {
+                To = user.Email!,
+                Subject = "Confirm Your Email",
+                Body = emailBody
+            };
+
+            // ✅ ✅ إرسال الإيميل
+            await emailService.SendEmail(emailModel);
+
 
             var response = new UserDto()
             {
@@ -156,5 +175,26 @@ namespace Arabeya.Core.Application.Services.Auth
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+        public async Task<Response<string>> ConfirmUserEmail(ConfirmEmailDto email)
+        {
+            if (string.IsNullOrEmpty(email.Email) || string.IsNullOrEmpty(email.Token))
+                return Response<string>.Fail(HttpStatusCode.BadRequest, ErrorType.BadRequest.ToString(), "Email and Token are required.");
+
+            var user = await userManager.FindByEmailAsync(email.Email);
+
+            if (user == null)
+                return Response<string>.Fail(HttpStatusCode.NotFound, ErrorType.NotFound.ToString(), "User not found.");
+
+            var decodedToken = Uri.UnescapeDataString(email.Token);
+
+            var result = await userManager.ConfirmEmailAsync(user, decodedToken);
+
+            if (result.Succeeded)
+                return Response<string>.Success("Email is successfully confirmed.");
+
+            return Response<string>.Fail(HttpStatusCode.BadRequest, ErrorType.BadRequest.ToString(), "Email confirmation failed.");
+        }
+
     }
 }

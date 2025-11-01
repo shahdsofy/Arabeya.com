@@ -7,5 +7,7 @@ namespace Arabeya.Core.Application.Abstraction.Sevices.Auth
     {
         Task<Response<UserDto>> LoginAsync(LoginDto model);
         Task<Response<UserDto>> RegisterAsync (RegisterDto model);
+
+        Task<Response<string>> ConfirmUserEmail(ConfirmEmailDto email); 
     }
 }

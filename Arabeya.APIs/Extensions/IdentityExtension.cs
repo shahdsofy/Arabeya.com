@@ -25,7 +25,8 @@ namespace Arabeya.APIs.Extensions
 
                 options.SignIn.RequireConfirmedEmail = true;
 
-            }).AddEntityFrameworkStores<IdentityContext>();
+            }).AddEntityFrameworkStores<IdentityContext>()
+            .AddDefaultTokenProviders();
 
             services.AddScoped(typeof(IAuthService),typeof(AuthService));
 
