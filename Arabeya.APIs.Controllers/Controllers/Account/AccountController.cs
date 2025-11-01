@@ -21,5 +21,11 @@ namespace Arabeya.APIs.Controllers.Controllers.Account
             return Ok(result);
         }
 
+        [HttpPost("Confirm Email")]
+        public async Task<ActionResult<string>> ConfirmEmail(ConfirmEmailDto model)
+        {
+            var result = await serviceManager.authService.ConfirmUserEmail(model);
+            return Ok(result);
+        }
     }
 }
