@@ -27,5 +27,19 @@ namespace Arabeya.APIs.Controllers.Controllers.Account
             var result = await serviceManager.authService.ConfirmUserEmail(model);
             return Ok(result);
         }
+
+        [HttpPost("Forget Password")]
+        public async Task<ActionResult> ForgetPassword(string email)
+        {
+            var result = await serviceManager.authService.ForgetPasswordAsync(email);
+            return Ok(result);
+        }
+
+        [HttpPost("Reset Password")]
+        public async Task<ActionResult> ResetPassword(ResetPasswordDto model)
+        {
+            var result=await serviceManager.authService.ResetPasswordAsync(model);
+            return Ok(result);
+        }
     }
 }

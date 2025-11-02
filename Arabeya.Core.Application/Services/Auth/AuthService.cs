@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Org.BouncyCastle.Pqc.Crypto.Lms;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
@@ -196,5 +197,60 @@ namespace Arabeya.Core.Application.Services.Auth
             return Response<string>.Fail(HttpStatusCode.BadRequest, ErrorType.BadRequest.ToString(), "Email confirmation failed.");
         }
 
+        public async  Task<Response<string>> ForgetPasswordAsync(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+                return Response<string>.Fail(HttpStatusCode.BadRequest, ErrorType.BadRequest.ToString(), "Email is required");
+           
+
+            var user=await userManager.FindByEmailAsync(email);
+
+            if (user == null)
+                return Response<string>.Fail(HttpStatusCode.NotFound, ErrorType.NotFound.ToString(), "User is not found");
+
+
+            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+            var encondedToken=Uri.EscapeDataString(token);
+            Console.WriteLine("Token: " + encondedToken);
+            var body = $"Your password reset token:\n\n{encondedToken}\n\nUse it with your email to reset your password.";
+
+
+            var Emailbuilder = new Arabeya.Core.Application.Abstraction.Models.Emails.Email()
+            {
+                To = user.Email!,
+                Body = body,
+                Subject = "Reset Password"
+
+            };
+
+            await emailService.SendEmail(Emailbuilder);
+            
+            return Response<string>.Success("Password reset token has been sent to your email.");
+        }
+
+        public async Task<Response<string>> ResetPasswordAsync(ResetPasswordDto passwordDto)
+        {
+            if(string.IsNullOrEmpty(passwordDto.NewPassword)||
+                string.IsNullOrEmpty(passwordDto.Token)||
+                string.IsNullOrEmpty(passwordDto.Email))
+             return Response<string>.Fail(HttpStatusCode.BadRequest, ErrorType.BadRequest.ToString(), "All fields Are required");
+
+            var user = await userManager.FindByEmailAsync(passwordDto.Email);
+
+            if (user==null)
+                return Response<string>.Fail(HttpStatusCode.NotFound, ErrorType.NotFound.ToString(), "User is not found");
+
+
+            var decodedToken = Uri.UnescapeDataString(passwordDto.Token);
+
+            var result=await userManager.ResetPasswordAsync(user,decodedToken,passwordDto.NewPassword);
+
+            if(result.Succeeded)
+              return  Response<string>.Success("Password reset successfully.");
+
+            var errors = result.Errors.Select(e => e.Description).ToList();
+            return Response<string>.Fail(HttpStatusCode.BadRequest, ErrorType.BadRequest.ToString(), string.Join(", ", errors));
+            
+        }
     }
 }
