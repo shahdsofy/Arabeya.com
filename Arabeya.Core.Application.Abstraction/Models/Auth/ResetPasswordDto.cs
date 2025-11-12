@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Arabeya.Core.Application.Abstraction.Models.Auth
 {
-    public class ResetPasswordDto
-    {
-        public string NewPassword { get; set; }=null!;
+	public class ResetPasswordDto
+	{
+		public required string OldPassword { get; set; }
+		public string NewPassword { get; set; } = null!;
 
-        [EmailAddress]
-        public string Email { get; set; }= null!;
+		[EmailAddress]
+		public string Email { get; set; } = null!;
 
-        public string Token { get; set; } = null!;
-    }
+	}
 }
