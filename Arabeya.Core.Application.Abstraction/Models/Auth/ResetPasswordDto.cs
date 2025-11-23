@@ -12,7 +12,9 @@ namespace Arabeya.Core.Application.Abstraction.Models.Auth
 		public required string OldPassword { get; set; }
 		public string NewPassword { get; set; } = null!;
 
-		[EmailAddress]
+		public string OTP { get; set; } = null!;
+
+        [EmailAddress]
 		public string Email { get; set; } = null!;
 
 	}
