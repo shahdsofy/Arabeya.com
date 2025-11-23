@@ -23,6 +23,8 @@ namespace Arabeya.Core.Application
             services.Configure<MailSettings>(configuration.GetSection("MailSettings"));
             services.AddTransient(typeof(IEmailService), typeof(EmailService));
 
+            services.AddMemoryCache();
+
             return services;
         }
     }

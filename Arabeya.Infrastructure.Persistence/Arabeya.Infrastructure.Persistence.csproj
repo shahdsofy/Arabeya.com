@@ -12,17 +12,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Config\" />
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Data\Interceptors\" />
     <Folder Include="Data\Seed\" />
-    <Folder Include="Identity\Migrations\" />
     <Folder Include="Identity\Config\" />
+    <Folder Include="Identity\Migrations\" />
     <Folder Include="UnitOfWork\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Arabeya.Core.Application.Abstraction\Arabeya.Core.Application.Abstraction.csproj" />
     <ProjectReference Include="..\Arabeya.Core.Domain\Arabeya.Core.Domain.csproj" />
   </ItemGroup>
 
