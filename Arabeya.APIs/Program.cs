@@ -2,6 +2,7 @@
 using Arabeya.APIs.Extensions;
 using Arabeya.APIs.Middlewares;
 using Arabeya.Core.Application;
+using Arabeya.Core.Application.Abstraction;
 using Arabeya.Infrastructure;
 using Arabeya.Infrastructure.Persistence;
 using System.Threading.Tasks;
@@ -24,6 +25,9 @@ namespace Arabeya.APIs
 			builder.Services.AddPersistenceServices(builder.Configuration);
 			builder.Services.AddApplicationServices(builder.Configuration);
 			builder.Services.AddIdentityService(builder.Configuration);
+			builder.Services.AddHttpContextAccessor();
+			builder.Services.AddScoped(typeof(ILoggedInUserService),typeof(LoggedInUserService));
+
 
 
             var app = builder.Build();
